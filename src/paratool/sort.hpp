@@ -165,7 +165,7 @@ template <typename Iterator>
 void intro_sort(
 	Iterator begin, Iterator end, int depth)
 {
-	const int INSERTION_THRESHOLD = 16;
+	const size_t INSERTION_THRESHOLD = 16;
 	if(depth == 0){
 		heap_sort(begin, end);
 	}else{
@@ -178,8 +178,8 @@ void intro_sort(
 			Iterator pivot = begin;
 			Iterator left = begin + 1, right = end - 1;
 			while(true){
-				while(*left <= *pivot && left != right){ ++left; }
-				while(*pivot <= *right && left != right){ --right; }
+				while(!(*pivot < *left) && left != right){ ++left; }
+				while(!(*right < *pivot) && left != right){ --right; }
 				if(left == right){ break; }
 				std::swap(*left, *right);
 			}
